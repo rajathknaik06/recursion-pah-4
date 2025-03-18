@@ -1,0 +1,41 @@
+""" You are developing a text compression utility for a messaging application. The utility will compress repetitive sequences of characters in a string to reduce the overall message size without losing any information. As part of this utility, you need to implement a recursive function that compresses a given string according to the following rules:
+
+
+
+If a character is repeated consecutively in the string, it should be replaced with the character followed by the count of its consecutive occurrences.
+If a character is not repeated, it remains unchanged.
+Input format :
+The input consists of a single line containing the string to be compressed.
+
+Output format :
+The output consists of a single line containing the compressed string."""
+
+
+def compress_string(s):
+    if not s:
+        return ""
+
+    compressed = ""
+
+    count = 1
+    # Iterate through the string to find consecutive repeating characters
+    while count < len(s) and s[count] == s[0]:
+        count += 1
+
+    # If more than one repeating character found, append the count
+    if count > 1:
+        compressed += s[0] + str(count)
+    else:
+        compressed += s[0]
+
+    # Recursive call on the remaining part of the string
+    return compressed + compress_string(s[count:])
+
+# Main function to take input from the user and call the compress_string function
+def main():
+    input_string = input()
+    compressed_string = compress_string(input_string)
+    print(compressed_string)
+
+if __name__ == "__main__":
+    main()
